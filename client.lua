@@ -1,3 +1,14 @@
+--[[
+ /$$$$$$$   /$$$$$$   /$$$$$$    /$$    
+| $$__  $$ /$$__  $$ /$$__  $$  | $$    
+| $$  \ $$|__/  \ $$|__/  \ $$ /$$$$$$  
+| $$$$$$$/   /$$$$$/   /$$$$$/|_  $$_/  
+| $$____/   |___  $$  |___  $$  | $$    
+| $$       /$$  \ $$ /$$  \ $$  | $$ /$$
+| $$      |  $$$$$$/|  $$$$$$/  |  $$$$/
+|__/       \______/  \______/    \___/  
+            P33t.tebex.io
+--]]
 local QBCore = exports['qb-core']:GetCoreObject()
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
@@ -54,7 +65,6 @@ if Config.Debug == true then
             SpawnPed()
         end)
         RegisterCommand("debug_showblip", function() CreateBlips() end)
-        RegisterCommand("debug_fetchtrailers", function() FetchTrailers() end)
     end
 end
 
@@ -77,7 +87,7 @@ function openMenu()
                 txt = '',
                 icon = Config.ItemIcon,
                 params = {
-                    event = 'p33t:client:renttrailer', -- event name
+                    event = 'p33t-trailers:client:renttrailer', -- event name
                     args = {
                         name = k, -- value we want to pass
                         text = v
@@ -88,10 +98,8 @@ function openMenu()
     exports['qb-menu']:openMenu(trailerList) -- open our menu
 end
 
-AddEventHandler('p33t:client:renttrailer', function(name, text)
+AddEventHandler('p33t-trailers:client:renttrailer', function(name, text)
     DebugPrint("Renting Trailer with name: " .. name.name)
-    -- check if the player has enough money to rent the trailer
-
     QBCore.Functions.TriggerCallback('p33t-trailers:server:RentCheck',
                                      function(CanRent)
         if CanRent then

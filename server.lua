@@ -1,5 +1,16 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+--[[
+ /$$$$$$$   /$$$$$$   /$$$$$$    /$$    
+| $$__  $$ /$$__  $$ /$$__  $$  | $$    
+| $$  \ $$|__/  \ $$|__/  \ $$ /$$$$$$  
+| $$$$$$$/   /$$$$$/   /$$$$$/|_  $$_/  
+| $$____/   |___  $$  |___  $$  | $$    
+| $$       /$$  \ $$ /$$  \ $$  | $$ /$$
+| $$      |  $$$$$$/|  $$$$$$/  |  $$$$/
+|__/       \______/  \______/    \___/  
+            P33t.tebex.io
+--]]
 
+local QBCore = exports['qb-core']:GetCoreObject()
 
 QBCore.Functions.CreateCallback('p33t-trailers:server:RentCheck', function(source, cb)
     local src = source
