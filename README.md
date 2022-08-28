@@ -9,4 +9,4 @@
 No more stealing npc vehicles to get the trailer.
 This script will bring a lot more roleplay to your server because players will be able to rent trailers. You can set almost anything in the config including location, ped, trailers, notifications, messages and much more. It’s completely free but it’s obfuscated using fivem escrow but that’s not a problem because completely everything is customizable using the [config](https://github.com/itsP33t/trailer-rent/blob/main/config.lua "config")
 
-[Imgur](https://i.imgur.com/nBIDqV3.png)
+![](https://i.imgur.com/nBIDqV3.png)
