@@ -1,14 +1,3 @@
---[[
- /$$$$$$$   /$$$$$$   /$$$$$$    /$$    
-| $$__  $$ /$$__  $$ /$$__  $$  | $$    
-| $$  \ $$|__/  \ $$|__/  \ $$ /$$$$$$  
-| $$$$$$$/   /$$$$$/   /$$$$$/|_  $$_/  
-| $$____/   |___  $$  |___  $$  | $$    
-| $$       /$$  \ $$ /$$  \ $$  | $$ /$$
-| $$      |  $$$$$$/|  $$$$$$/  |  $$$$/
-|__/       \______/  \______/    \___/  
-            P33t.tebex.io
---]]
 local QBCore = exports['qb-core']:GetCoreObject()
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
@@ -19,6 +8,35 @@ RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
     CreateBlips()
     DebugPrint("Created Blip")
 end)
+
+AddEventHandler('onResourceStart', function(resourceName)
+    if (GetCurrentResourceName() ~= resourceName) then
+        return
+    end
+    DebugPrint("Spawning PED")
+    SpawnPed()
+    DebugPrint("Spawned PED")
+    DebugPrint("Creating Blip")
+    CreateBlips()
+    DebugPrint("Created Blip")
+end)
+
+AddEventHandler('onResourceStop', function(resource)
+   if resource == GetCurrentResourceName() then
+      -- Remove all peds and blips
+        for k, v in pairs(Config.PedLocations) do
+             if DoesEntityExist(v.Ped) then
+                DeletePed(v.Ped)
+             end
+        end
+        for k, v in pairs(Config.Blips) do
+            if DoesBlipExist(v.Blip) then
+                RemoveBlip(v.Blip)
+            end
+        end
+   end
+end)
+
 
 function SpawnPed()
     CreateThread(function()
@@ -50,12 +68,14 @@ function SpawnPed()
 end
 
 function CreateBlips()
+    if Config.ShowBlip == true then
     local blip = AddBlipForCoord(Config.SpawnLocation)
     SetBlipSprite(blip, Config.BlipIconId)
     SetBlipAsShortRange(blip, true)
     BeginTextCommandSetBlipName('trlr')
     AddTextEntry('trlr', Config.BlipLabel)
     EndTextCommandSetBlipName(blip)
+    end
 end
 
 if Config.Debug == true then
@@ -65,6 +85,7 @@ if Config.Debug == true then
             SpawnPed()
         end)
         RegisterCommand("debug_showblip", function() CreateBlips() end)
+        RegisterCommand("debug_fetchtrailers", function() FetchTrailers() end)
     end
 end
 
@@ -87,7 +108,7 @@ function openMenu()
                 txt = '',
                 icon = Config.ItemIcon,
                 params = {
-                    event = 'p33t-trailers:client:renttrailer', -- event name
+                    event = 'p33t:client:renttrailer', -- event name
                     args = {
                         name = k, -- value we want to pass
                         text = v
@@ -98,8 +119,10 @@ function openMenu()
     exports['qb-menu']:openMenu(trailerList) -- open our menu
 end
 
-AddEventHandler('p33t-trailers:client:renttrailer', function(name, text)
+AddEventHandler('p33t:client:renttrailer', function(name, text)
     DebugPrint("Renting Trailer with name: " .. name.name)
+    -- check if the player has enough money to rent the trailer
+
     QBCore.Functions.TriggerCallback('p33t-trailers:server:RentCheck',
                                      function(CanRent)
         if CanRent then

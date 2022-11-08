@@ -2,8 +2,8 @@
 fx_version 'bodacious'
 game 'gta5'
 
-author 'p33t.tebex.io'
-version '1.0.0'
+author 'FiveM.P33t.shop'
+version '1.0.1'
 
 client_script {
   'config.lua',

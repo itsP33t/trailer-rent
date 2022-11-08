@@ -8,7 +8,7 @@ Config = {}
 | $$       /$$  \ $$ /$$  \ $$  | $$ /$$
 | $$      |  $$$$$$/|  $$$$$$/  |  $$$$/
 |__/       \______/  \______/    \___/  
-            P33t.tebex.io
+            FiveM.P33t.shop
 --]]
 
 Config.PedModel = "A_M_M_BevHills_02"
@@ -26,6 +26,7 @@ Config.NotificationType = "qb" -- "qb" = Basic qb notification, "okok" = okokNot
 Config.NotificationOnRent = "You have rented a " -- after this text it will show the trailer name
 Config.TrailerPrice = 500
 Config.TransactionReason = "Trailer Rent" -- will show in logs
+Config.OnNoFunds = "You don't have enough money!" -- notification when you don't have enough money
 
 -- Trailers
 Config.Trailers = { -- ['spawn code'] = 'Name that will show in menu'
